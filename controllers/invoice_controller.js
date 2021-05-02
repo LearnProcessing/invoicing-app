@@ -7,10 +7,13 @@ class InvoiceController {
         try{
             const rows = await xlsxFile('./data/import.xlsx', { sheet: 'Invoice' })
             let invoiceRecords = []
-            
+            function validateEmail(email) {
+                const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(String(email).toLowerCase());
+            }
             rows.map((row, index) => {
                 let isExist = false
-                if(index > 0 && row[1] !== '' && row[2] !== '' && row[3] !== '' && row[1] && row[2] && row[3] && (row[3] === 'CREDIT_CARD' || row[3] === 'TRANSFER')){
+                if(index > 0 && row[1] !== '' && row[2] !== '' && row[3] !== '' && row[1] && row[2] && row[3] && (row[3] === 'CREDIT_CARD' || row[3] === 'TRANSFER') && validateEmail(row[2])){
                     
                     let dateArray = row[1].split('/')
                     let stringDate = dateArray[2]+'-'+ dateArray[1]+'-'+(Number(dateArray[0]) + 1).toString()
@@ -94,7 +97,7 @@ class InvoiceController {
     }
     static async deleteInvoice(req, res, next){
         try{
-            const { id } = req.params
+            const { id } = +req.params
             await Invoice.destroy({
                 where: {id}
             })
@@ -111,7 +114,7 @@ class InvoiceController {
     }
     static async editInvoice(req, res, next){
         try{
-            const { id } = req.params
+            const { id } = +req.params
             const { date, users_email, payment_method} = req.body
             const invoice = await Invoice.update({
                 date,

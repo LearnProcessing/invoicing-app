@@ -21,8 +21,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       validate: {
         len: {
-          args: [6],
-          msg: 'course name should be at least six characters'
+          args: [3],
+          msg: 'course name should be at least three characters'
         }
       }
     },
@@ -39,8 +39,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       validate: {
         min: {
-          args: 0,
-          msg: 'minimum price is 0'
+          args: [0],
+          msg: 'minimum price is 0' 
         }
       }
     },
