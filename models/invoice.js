@@ -31,13 +31,10 @@ module.exports = (sequelize, DataTypes) => {
     payment_method: {
       type: DataTypes.STRING,
       validate: {
-        equals: {
-          args: 'CREDIT CARD' || 'TRANSFER',
-          msg: 'valid payment method are credit card and transfer only'
-        },
-        notNull: {
-          args: true,
-          msg: 'payment method is required'
+        isValidPaymentMethod(value){
+          if(value !== 'CREDIT CARD' && value !== 'TRANSFER'){
+            throw new Error('valid payment method are Transfer and Credit Card only!');
+          }
         }
       }
     }
