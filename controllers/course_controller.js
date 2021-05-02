@@ -11,7 +11,7 @@ class CourseController {
             })
             res.status(201).json(course)
         } catch(error){
-            console.log(error)
+            next(error)
         }
     }
     static async getCourses(req, res, next){
@@ -19,7 +19,7 @@ class CourseController {
             const courses = await Course.findAll()
             res.status(200).json(courses)
         } catch(error){
-            console.log(error)
+            next(error)
         }
     }
     static async deleteCourse(req, res, next){
@@ -28,7 +28,7 @@ class CourseController {
             await Course.destroy({where: {id}})
             res.status(200).json({message: 'a course was deleted'})
         } catch(error){
-            console.log(error)
+            next(error)
         }
     }
     static async editCourse(req, res, next){
@@ -45,7 +45,7 @@ class CourseController {
             })
             res.status(200).json(course)
         } catch(error){
-            console.log(error)
+            next(error)
         }
     }
 }

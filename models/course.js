@@ -23,7 +23,11 @@ module.exports = (sequelize, DataTypes) => {
         len: {
           args: [3],
           msg: 'course name should be at least three characters'
-        }
+        },
+        notEmpty: {
+          args: true,
+          msg: 'course name can not be empty'
+        },  
       }
     },
     instructor: {
@@ -32,12 +36,20 @@ module.exports = (sequelize, DataTypes) => {
         len: {
           args: [2],
           msg: 'instructor name should be at least two characters'
-        }
+        },
+        notEmpty: {
+          args: true,
+          msg: 'instructor name can not be empty'
+        },  
       }
     },
     price: {
       type: DataTypes.INTEGER,
       validate: {
+        notEmpty: {
+          args: true,
+          msg: 'price can not be empty'
+        },  
         min: {
           args: [0],
           msg: 'minimum price is 0' 

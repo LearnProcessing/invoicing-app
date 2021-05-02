@@ -17,14 +17,26 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Invoice.init({
-    date: DataTypes.DATE,
+    date: {
+      type: DataTypes.DATE,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'instructor name can not be empty'
+        }
+      }
+    },
     users_email: {
       type: DataTypes.STRING,
       validate: {
         isEmail: {
           args: true,
           msg: 'email format is invalid'
-        }
+        },
+        notEmpty: {
+          args: true,
+          msg: 'email name can not be empty'
+        },
 
       }
     },
@@ -35,7 +47,11 @@ module.exports = (sequelize, DataTypes) => {
           if(value !== 'CREDIT CARD' && value !== 'TRANSFER'){
             throw new Error('valid payment method are Transfer and Credit Card only!');
           }
-        }
+        },
+        notEmpty: {
+          args: true,
+          msg: 'payment method name can not be empty'
+        },
       }
     }
   }, {
