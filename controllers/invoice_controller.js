@@ -35,7 +35,7 @@ class InvoiceController {
             await Invoice.bulkCreate(invoiceRecords)
             next()
         } catch(error){
-            res.send(error)
+            next(error)
         }
     }
 
@@ -61,7 +61,7 @@ class InvoiceController {
             await CourseSold.bulkCreate(coursesSoldRecords)
             res.status(201).json(coursesSoldRecords)
         } catch(error){
-            console.log(error)
+            next(error)
         }
     }
 
@@ -92,7 +92,7 @@ class InvoiceController {
 
             res.status(200).json({invoices, totalCCTransaction, totalRevenue})
         } catch(error){
-            console.log(error)
+            next(error)
         }
     }
     static async deleteInvoice(req, res, next){
@@ -109,7 +109,7 @@ class InvoiceController {
             })
             res.status(200).json({message: 'invoices was deleted'})
         } catch(error){
-            console.log(error)
+            next(error)
         }
     }
     static async editInvoice(req, res, next){
@@ -126,7 +126,7 @@ class InvoiceController {
             })
             res.status(200).json(invoice)
         } catch(error){
-            console.log(error)
+            next(error)
         }
     }
 }
