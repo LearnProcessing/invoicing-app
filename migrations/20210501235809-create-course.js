@@ -9,15 +9,19 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       course_name: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       instructor: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       price: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       income_sharing: {
+        allowNull: false,
         type: Sequelize.DECIMAL
       },
       createdAt: {
