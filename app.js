@@ -12,7 +12,7 @@ const cors = require('cors')
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-// app.use('/courses', courseRouter)
+app.use('/courses', courseRouter)
 app.use('/invoices', invoiceRouter)
 app.use('/', (req, res) => {
     res.send('hello world')
