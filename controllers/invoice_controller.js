@@ -7,10 +7,10 @@ class InvoiceController {
         try{
             const rows = await xlsxFile('./data/import.xlsx', { sheet: 'Invoice' })
             let invoiceRecords = []
-            function validateEmail(email) {
-                const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                return re.test(String(email).toLowerCase());
-            }
+            // function validateEmail(email) {
+            //     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            //     return re.test(String(email).toLowerCase());
+            // }
             rows.map((row, index) => {
                 let isExist = false
                 if(index > 0 && row[1] !== '' && row[2] !== '' && row[3] !== '' && row[1] && row[2] && row[3] && (row[3] === 'CREDIT_CARD' || row[3] === 'TRANSFER') && validateEmail(row[2])){
